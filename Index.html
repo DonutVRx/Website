@@ -1,72 +1,918 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DonutVRX — YouTube Channel</title>
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #0f0f0f; color: #fff; }
-    header { text-align: center; padding: 60px 20px; background: #1c1c1c; }
-    header h1 { font-size: 3em; color: #ff5c5c; margin: 0; }
-    header p { font-size: 1.2em; margin-top: 10px; }
-    .btn-subscribe { background: #ff0000; color: #fff; padding: 12px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; }
-    .section { padding: 50px 20px; text-align: center; }
-    .videos { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); padding: 0 20px; }
-    iframe { width: 100%; height: 200px; border: none; border-radius: 8px; }
-    footer { padding: 20px; background: #111; font-size: 0.9em; }
-    a.social { margin: 0 10px; color: #fff; text-decoration: none; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DonutVRx - Virtual Reality Gaming</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0f1e 0%, #1a1f2e 100%);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1f2e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            border-radius: 5px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(10, 15, 30, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: #ff6b6b;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 2px 0;
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,107,107,0.1) 0%, rgba(78,205,196,0.1) 50%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .glitch-text {
+            font-size: 5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0.05em 0 0 rgba(255,0,0,0.75),
+                        -0.025em -0.05em 0 rgba(0,255,0,0.75),
+                        0.025em 0.05em 0 rgba(0,0,255,0.75);
+            animation: glitch 500ms infinite;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 0.05em 0 0 rgba(255,0,0,0.75),
+                            -0.05em -0.025em 0 rgba(0,255,0,0.75),
+                            -0.025em 0.05em 0 rgba(0,0,255,0.75);
+            }
+            14% {
+                text-shadow: 0.05em 0 0 rgba(255,0,0,0.75),
+                            -0.05em -0.025em 0 rgba(0,255,0,0.75),
+                            -0.025em 0.05em 0 rgba(0,0,255,0.75);
+            }
+            15% {
+                text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75),
+                            0.025em 0.025em 0 rgba(0,255,0,0.75),
+                            -0.05em -0.05em 0 rgba(0,0,255,0.75);
+            }
+            49% {
+                text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75),
+                            0.025em 0.025em 0 rgba(0,255,0,0.75),
+                            -0.05em -0.05em 0 rgba(0,0,255,0.75);
+            }
+            50% {
+                text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75),
+                            0.05em 0 0 rgba(0,255,0,0.75),
+                            0 -0.05em 0 rgba(0,0,255,0.75);
+            }
+            99% {
+                text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75),
+                            0.05em 0 0 rgba(0,255,0,0.75),
+                            0 -0.05em 0 rgba(0,0,255,0.75);
+            }
+            100% {
+                text-shadow: -0.025em 0 0 rgba(255,0,0,0.75),
+                            -0.025em -0.025em 0 rgba(0,255,0,0.75),
+                            -0.025em -0.05em 0 rgba(0,0,255,0.75);
+            }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #a0a0a0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: #fff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,107,107,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #4ecdc4;
+        }
+
+        .btn-secondary:hover {
+            background: #4ecdc4;
+            color: #1a1a1a;
+            transform: translateY(-3px);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 2rem;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #a0a0a0;
+            margin-top: 0.5rem;
+        }
+
+        /* Latest Videos Section */
+        .videos-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,107,107,0.2);
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+            border-color: #4ecdc4;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.1);
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h3 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 1rem;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .video-meta i {
+            margin-right: 0.3rem;
+            color: #ff6b6b;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 5rem 2rem;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            border: 3px solid linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .about-content p {
+            color: #a0a0a0;
+            margin-bottom: 1rem;
+        }
+
+        .equipment-list {
+            margin-top: 2rem;
+        }
+
+        .equipment-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .equipment-item i {
+            color: #4ecdc4;
+            font-size: 1.5rem;
+        }
+
+        /* Community Section */
+        .community-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b6b;
+        }
+
+        .social-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .fa-discord { color: #5865F2; }
+        .fa-twitter { color: #1DA1F2; }
+        .fa-instagram { color: #E4405F; }
+        .fa-youtube { color: #FF0000; }
+
+        .social-card h3 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .social-card p {
+            color: #a0a0a0;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            color: #4ecdc4;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .social-link:hover {
+            color: #ff6b6b;
+        }
+
+        /* Schedule Section */
+        .schedule-section {
+            padding: 5rem 2rem;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .schedule-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .schedule-item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .schedule-day {
+            font-weight: bold;
+            color: #ff6b6b;
+            min-width: 100px;
+        }
+
+        .schedule-time {
+            color: #4ecdc4;
+        }
+
+        .schedule-game {
+            color: #a0a0a0;
+            margin-left: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0,0,0,0.5);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #ff6b6b;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #a0a0a0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 15, 30, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .glitch-text {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .schedule-game {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="#home">🍩 DonutVRx</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
-  <!-- Hero -->
-  <header>
-    <h1>DonutVRX</h1>
-    <p>Gaming • VR • Entertainment</p>
-    <a class="btn-subscribe" href="https://youtube.com/@donutvrx" target="_blank">Subscribe on YouTube</a>
-  </header>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="glitch-text">DonutVRx</h1>
+            <p>Step into the world of Virtual Reality Gaming</p>
+            <div class="hero-buttons">
+                <a href="https://youtube.com/@DonutVRx?sub_confirmation=1" class="btn btn-primary" target="_blank">
+                    <i class="fab fa-youtube"></i> Subscribe
+                </a>
+                <a href="#videos" class="btn btn-secondary">Watch Latest Videos</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- Featured Video -->
-  <div class="section" id="featured">
-    <h2>Latest Video</h2>
-    <iframe 
-      src="https://www.youtube.com/embed?listType=user_uploads&list=UUDonutVRX" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-  </div>
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Subscribers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2M+</div>
+                <div class="stat-label">Total Views</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Videos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">VR Gaming</div>
+            </div>
+        </div>
+    </section>
 
-  <!-- About -->
-  <div class="section" id="about">
-    <h2>About</h2>
-    <p>Welcome to DonutVRX — your go-to channel for VR gameplay, epic reactions and fun gaming content!  
-       Subscribe and join the adventure!</p>
-  </div>
+    <!-- Latest Videos Section -->
+    <section id="videos" class="videos-section">
+        <h2 class="section-title">Latest VR Adventures</h2>
+        <div class="videos-grid">
+            <!-- Video Card 1 -->
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/REPLACE_WITH_VIDEO_ID_1/maxresdefault.jpg" alt="VR Gameplay 1">
+                </div>
+                <div class="video-info">
+                    <h3>EPIC VR Horror Gameplay</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 150K views</span>
+                        <span><i class="fas fa-calendar"></i> 2 days ago</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Video Card 2 -->
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/REPLACE_WITH_VIDEO_ID_2/maxresdefault.jpg" alt="VR Gameplay 2">
+                </div>
+                <div class="video-info">
+                    <h3>Beat Saber VR Challenge</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 89K views</span>
+                        <span><i class="fas fa-calendar"></i> 5 days ago</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Video Card 3 -->
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/REPLACE_WITH_VIDEO_ID_3/maxresdefault.jpg" alt="VR Gameplay 3">
+                </div>
+                <div class="video-info">
+                    <h3>VR Sim Racing Setup Tour</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 200K views</span>
+                        <span><i class="fas fa-calendar"></i> 1 week ago</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Video Card 4 -->
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/REPLACE_WITH_VIDEO_ID_4/maxresdefault.jpg" alt="VR Gameplay 4">
+                </div>
+                <div class="video-info">
+                    <h3>Multiplayer VR Mayhem</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 120K views</span>
+                        <span><i class="fas fa-calendar"></i> 2 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- More Videos -->
-  <div class="section" id="videos">
-    <h2>More Videos</h2>
-    <div class="videos">
-      <!-- Replace VIDEO_ID_X with real video IDs from your channel -->
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" allowfullscreen></iframe>
-    </div>
-  </div>
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="https://via.placeholder.com/500x500/1a1f2e/4ecdc4?text=DonutVRx" alt="DonutVRx Avatar">
+            </div>
+            <div class="about-content">
+                <h2>About Me</h2>
+                <p>Hey there! I'm DonutVRx, a passionate VR gamer and content creator. I've been exploring virtual reality worlds since 2020 and love sharing my experiences with the community.</p>
+                <p>From horror games to rhythm games, racing sims to multiplayer mayhem - if it's in VR, I'm playing it!</p>
+                
+                <div class="equipment-list">
+                    <h3>My VR Setup</h3>
+                    <div class="equipment-item">
+                        <i class="fas fa-vr-cardboard"></i>
+                        <span>Meta Quest 3 / Valve Index</span>
+                    </div>
+                    <div class="equipment-item">
+                        <i class="fas fa-microchip"></i>
+                        <span>RTX 4090 | i9-13900K | 64GB RAM</span>
+                    </div>
+                    <div class="equipment-item">
+                        <i class="fas fa-microphone"></i>
+                        <span>Shure SM7B Mic</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Contact / Social -->
-  <div class="section" id="social">
-    <h2>Follow Me</h2>
-    <a class="social" href="https://youtube.com/@donutvrx" target="_blank">YouTube</a>
-    <a class="social" href="https://instagram.com" target="_blank">Instagram</a>
-    <a class="social" href="https://twitter.com" target="_blank">Twitter</a>
-  </div>
+    <!-- Community Section -->
+    <section id="community" class="community-section">
+        <h2 class="section-title">Join The Community</h2>
+        <div class="social-grid">
+            <div class="social-card">
+                <i class="fab fa-discord"></i>
+                <h3>Discord</h3>
+                <p>Join 10,000+ members for VR gaming sessions</p>
+                <a href="#" class="social-link">Join Server <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="social-card">
+                <i class="fab fa-twitter"></i>
+                <h3>Twitter</h3>
+                <p>Daily updates and VR news</p>
+                <a href="#" class="social-link">Follow <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="social-card">
+                <i class="fab fa-instagram"></i>
+                <h3>Instagram</h3>
+                <p>Behind the scenes & VR highlights</p>
+                <a href="#" class="social-link">Follow <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="social-card">
+                <i class="fab fa-youtube"></i>
+                <h3>YouTube</h3>
+                <p>Main channel for all VR content</p>
+                <a href="https://youtube.com/@DonutVRx" class="social-link" target="_blank">Subscribe <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    &copy; 2026 DonutVRX • Made with ❤️
-  </footer>
+    <!-- Schedule Section -->
+    <section id="schedule" class="schedule-section">
+        <h2 class="section-title">Stream Schedule</h2>
+        <div class="schedule-container">
+            <div class="schedule-item">
+                <span class="schedule-day">Monday</span>
+                <span class="schedule-time">7:00 PM EST</span>
+                <span class="schedule-game">VR Horror Games</span>
+            </div>
+            <div class="schedule-item">
+                <span class="schedule-day">Wednesday</span>
+                <span class="schedule-time">8:00 PM EST</span>
+                <span class="schedule-game">Beat Saber / Rhythm Games</span>
+            </div>
+            <div class="schedule-item">
+                <span class="schedule-day">Friday</span>
+                <span class="schedule-time">9:00 PM EST</span>
+                <span class="schedule-game">Multiplayer VR with Subs</span>
+            </div>
+            <div class="schedule-item">
+                <span class="schedule-day">Saturday</span>
+                <span class="schedule-time">3:00 PM EST</span>
+                <span class="schedule-game">VR Sim Racing</span>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>DonutVRx</h3>
+                <p>Your daily dose of Virtual Reality gaming and adventures. Join me as we explore the best VR has to offer!</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#videos">Videos</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#community">Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:business@donutvrx.com">business@donutvrx.com</a></li>
+                    <li><a href="#">Sponsorships</a></li>
+                    <li><a href="#">Collaborations</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DonutVRx. All rights reserved. Made with 🍩 for VR gaming</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active link highlighting on scroll
+        window.addEventListener('scroll', () => {
+            let sections = document.querySelectorAll('section');
+            let navLinks = document.querySelectorAll('.nav-menu a');
+            
+            sections.forEach(section => {
+                let top = section.offsetTop - 100;
+                let bottom = top + section.offsetHeight;
+                let scroll = window.scrollY;
+                
+                if (scroll >= top && scroll < bottom) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + section.getAttribute('id')) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Animate stats on scroll
+        const stats = document.querySelectorAll('.stat-number');
+        let animated = false;
+
+        window.addEventListener('scroll', () => {
+            if (!animated) {
+                stats.forEach(stat => {
+                    let position = stat.getBoundingClientRect().top;
+                    let screenHeight = window.innerHeight;
+                    
+                    if (position < screenHeight) {
+                        // Add animation here if you want numbers to count up
+                        animated = true;
+                    }
+                });
+            }
+        });
+    </script>
 </body>
-</html>
+  </html>
